@@ -2,33 +2,40 @@
 <html lang="en">
 
 <head>
-    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Dosis:wght@650&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Dosis';
             font-size: 22px;
             text-align: center;
+            margin: 80px 0;
         }
 
         input[type=text] {
             width: 50%;
             padding: 20px 20px;
-            margin: 50px 0;
+            margin: 80px 0;
             box-sizing: border-box;
-            background-color: #3CBC8D;
-            color: white;
+            background-color: #c4c4c4;
+            color: rgb(255, 255, 255);
             border-radius: 999px;
             font-size: 20px;
             font-family: 'Dosis';
+            border: none;
+        }
+
+        input[type=text]::placeholder {
+            color: rgb(255, 255, 255);
         }
 
         input[type=button] {
-            width: 10%;
+            width: 15%;
             padding: 20px 0px;
-            margin: 50px 0;
+            margin: 80px 0;
             box-sizing: border-box;
-            background-color: white;
-            color: #555;
+            background-color: rgb(122, 191, 255);
+            color: rgb(255, 255, 255);
+            border: none;
             font-weight: bold;
             border-radius: 999px;
             font-size: 20px;
@@ -44,7 +51,7 @@
     <h1>YouTube Downloader</h1>
     <form>
         <input type="text" placeholder="Insert link here"
-            size="80" id="txt_url">
+            size="60" id="txt_url">
         <input type="button" id="btn_fetch" value="Download" onclick="">
     </form>
 
@@ -55,6 +62,15 @@
 
 
     <script>
+        function downloadURI(uri, name) {
+             var link = document.createElement("a");
+            link.download = name;
+            link.href = uri;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            delete link;
+        }
         $(function () {
 
             $("#btn_fetch").click(function () {
@@ -62,7 +78,6 @@
                 var url = $("#txt_url").val();
                 if (url == null || url == "" || !url.includes("youtube")) {
                     console.log
-                    alert("Enter a valid URL")
                 }
                 else {
 
@@ -79,7 +94,6 @@
                         var error = data['error'];
 
                         if (error) {
-                            alert('Error: ' + error);
                             return;
                         }
 
@@ -87,15 +101,12 @@
                         var first = links[0];
 
                         if (typeof first === 'undefined') {
-                            alert('No video found in the link provided');
                             return;
                         }
 
-                        var stream_url = 'stream.php?url=' + encodeURIComponent(first);
-
-                        var video = $("video");
-                        video.attr('src', stream_url);
-                        video[0].load();
+                        var stream_url = encodeURIComponent(first);
+                        alert(stream_url)
+                        downloadURI(stream_url, video.mp4)
                     });
                 }
             });
