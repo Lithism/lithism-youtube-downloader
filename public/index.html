@@ -54,15 +54,9 @@
 </head>
 
 <body>
-    <h1>YouTube Downloader By <span style="text-shadow: #3CBC8D 4px 4px 10px ;font-size: 65px;">Maadhav Sharma</span>
-    </h1>
-    <p style="font-size: 23px;">
-        Source Code:
-        <a
-            href="https://github.com/Maadhav/youtube-downloader-API">https://github.com/Maadhav/youtube-downloader-API</a>
-    </p>
+    <h1>YouTube Downloader</h1>
     <form>
-        <input type="text" placeholder="Insert A Youtube Link Here: https://www.youtube.com/watch?v=YSuHrTfcikU"
+        <input type="text" placeholder="Insert link here"
             size="80" id="txt_url">
         <input type="button" id="btn_fetch" value="Download" onclick="">
         <input type="button" id="get-api" value="Get API">
@@ -82,7 +76,7 @@
                 var url = $("#txt_url").val();
                 if (url == null || url == "" || !url.includes("youtube")) {
                     console.log
-                    alert("Please enter a valid Youtube url! \nExample: https://www.youtube.com/watch?v=OxD2nEyO-ug")
+                    alert("Enter a valid URL")
                 }
                 else {
 
@@ -107,7 +101,7 @@
                         var first = links[0];
 
                         if (typeof first === 'undefined') {
-                            alert('No video found!');
+                            alert('No video found in the link provided');
                             return;
                         }
 
@@ -122,17 +116,13 @@
             $("#get-api").click(function () {
                 var url = $("#txt_url").val();
                 if (url == null || url == "" || !url.includes("youtube")) {
-                    alert("Please enter a valid Youtube url! \nExample: https://www.youtube.com/watch?v=OxD2nEyO-ug")
+                    alert("Enter a valid URL")
                 }
                 else
                     window.location.href = "/video_info.php?url=" + url;
             });
         });
     </script>
-    <p style="font-size: 16px;">
-        Project Originally Forked From:
-        <a href="https://github.com/Athlon1600/youtube-downloader">https://github.com/Athlon1600/youtube-downloader</a>
-    </p>
 
 </body>
 
